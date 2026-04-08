@@ -1,0 +1,1 @@
+I'll update this file after the proper completion of the project. It will include all the necessary dependencies and their versions required for the project to run smoothly. This will ensure that anyone who wants to set up the project can do so without any issues related to missing or incompatible packages.
