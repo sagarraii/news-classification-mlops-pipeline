@@ -1,0 +1,5 @@
+outs:
+- md5: 89bfcd4481a38a518fcf5f24f6984da9
+  size: 4500321
+  hash: md5
+  path: BBC-NEWS.csv
