@@ -1,15 +1,5 @@
 <div align="center">
 
-```text
- /\   /\
-{  `---'  }
-{  O   O  }
-~~>  V  <~~
- \  \|/  /
-  `-----'
-
-   Hello, Human! 🦊
-```
 [![A mushroom-head robot drinking bubble tea](https://raw.githubusercontent.com/Codecademy/docs/main/media/codey.jpg 'Codey, the Codecademy mascot, drinking bubble tea')](https://codecademy.com)
 
 # 🚧 README Coming Soon 🚧
