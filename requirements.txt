@@ -1,0 +1,16 @@
+datasets
+pandas
+numpy
+ipykernel
+huggingface_hub
+joblib 
+ensure
+python-box
+pyyaml 
+dill
+scipy
+scikit-learn
+nltk
+xgboost
+lightgbm
+matplotlib
