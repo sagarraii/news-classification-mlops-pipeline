@@ -1,0 +1,6 @@
+COLUMNS:
+  description: object
+  label: int64
+  title: object
+TARGET_COLUMN:
+  target: label
