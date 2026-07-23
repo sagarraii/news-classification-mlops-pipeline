@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About This Desk — The Fourth Wire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="wire-texture" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a href="{{ url_for('index') }}" class="wordmark">
+        <span class="wordmark-glyph">✎</span>
+        <span class="wordmark-text">THE FOURTH WIRE</span>
+      </a>
+      <a href="{{ url_for('index') }}" class="about-btn">
+        <span aria-hidden="true">←</span> BACK TO DESK
+      </a>
+    </div>
+    <div class="masthead-rule"></div>
+    <div class="masthead-sub">MASTHEAD &nbsp;·&nbsp; BYLINE &nbsp;·&nbsp; PRODUCTION NOTES</div>
+  </header>
+
+  <main class="desk about-desk">
+
+    <section class="byline-card">
+      <div class="byline-tag">BYLINE</div>
+      <h1>{{ person.name }}</h1>
+      <p class="byline-role">{{ person.role }}</p>
+      <p class="byline-location">{{ person.location }}</p>
+      <p class="byline-bio">{{ person.bio }}</p>
+      <div class="byline-links">
+        <a href="mailto:{{ person.email }}">{{ person.email }}</a>
+        <a href="{{ person.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="{{ person.github }}" target="_blank" rel="noopener">GitHub</a>
+        <span>{{ person.phone }}</span>
+      </div>
+    </section>
+
+    <section class="dossier">
+      <div class="byline-tag">PRODUCTION NOTES</div>
+      <h2>{{ project.title }} — {{ project.subtitle }}</h2>
+      <p class="dossier-desc">{{ project.description }}</p>
+      <p class="dossier-dataset"><strong>Dataset:</strong> {{ project.dataset }}</p>
+
+      <h3>Pipeline</h3>
+      <ol class="pipeline-list">
+        {% for step in project.pipeline %}
+        <li>{{ step }}</li>
+        {% endfor %}
+      </ol>
+
+      <h3>Models on the Wire</h3>
+      <table class="models-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Validation Macro F1</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in project.models_compared %}
+          <tr {% if m.name == 'LinearSVC' %}class="winner-row"{% endif %}>
+            <td>{{ m.name }}{% if m.name == 'LinearSVC' %} <span class="winner-tag">SELECTED</span>{% endif %}</td>
+            <td>{{ "%.4f"|format(m.macro_f1) }}</td>
+            <td>{{ m.note }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>Held-Out Test Performance</h3>
+      <div class="metric-row">
+        <div class="metric-chip">
+          <span class="metric-value">{{ "%.2f"|format(project.test_metrics.accuracy * 100) }}%</span>
+          <span class="metric-label">Accuracy</span>
+        </div>
+        <div class="metric-chip">
+          <span class="metric-value">{{ "%.4f"|format(project.test_metrics.macro_f1) }}</span>
+          <span class="metric-label">Macro F1</span>
+        </div>
+        <div class="metric-chip">
+          <span class="metric-value">{{ "%.4f"|format(project.test_metrics.weighted_f1) }}</span>
+          <span class="metric-label">Weighted F1</span>
+        </div>
+      </div>
+
+      <h3>Stack</h3>
+      <div class="stack-tags">
+        {% for tech in project.stack %}
+        <span class="stack-tag">{{ tech }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="status-line">
+        <span class="status-dot"></span> {{ project.status }}
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wire-footer">
+    <p>{{ project.title }} — {{ project.subtitle }}. {{ project.status }}</p>
+    <p class="model-info">Model: {{ project.model_name }} &nbsp;·&nbsp; {{ project.vectorizer_desc }}</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
