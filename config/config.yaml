@@ -63,3 +63,9 @@ model_evaluation:
 
   
 # rethink about the the path of traditional_model_trainer and model_evaluation
+
+transformer_trainer:
+
+  train_data_path: data/raw/train.csv
+  model_dir: artifacts/transformer/model
+  tokenizer_dir: artifacts/transformer/tokenizer
