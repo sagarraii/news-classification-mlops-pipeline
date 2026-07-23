@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fourth Wire — AI News Classification Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="wire-texture" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a href="{{ url_for('index') }}" class="wordmark">
+        <span class="wordmark-glyph">✎</span>
+        <span class="wordmark-text">THE FOURTH WIRE</span>
+      </a>
+      <a href="{{ url_for('about') }}" class="about-btn">
+        ABOUT THIS DESK <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div class="masthead-rule"></div>
+    <div class="masthead-sub">AI NEWS CLASSIFICATION TERMINAL &nbsp;·&nbsp; EST. JUL 2026 &nbsp;·&nbsp; FOUR-WAY DESK</div>
+  </header>
+
+  <main class="desk">
+
+    <section class="intro">
+      <h1>Feed it a headline. It stamps a desk.</h1>
+      <p>
+        Paste any news headline or short article snippet below. A LinearSVC model,
+        trained on 120,000 AG News articles, routes it to one of four desks —
+        <strong>World</strong>, <strong>Sports</strong>, <strong>Business</strong>, or <strong>Sci/Tech</strong> —
+        the same way a wire editor once sorted incoming copy by hand.
+      </p>
+    </section>
+
+    <section class="console" aria-label="Classification console">
+      <div class="console-frame">
+        <div class="console-label">
+          <span class="dot"></span> INPUT WIRE
+        </div>
+        <textarea
+          id="text-input"
+          class="console-textarea"
+          placeholder="e.g. Central bank raises interest rates for the third time this year as inflation persists..."
+          maxlength="2000"
+          rows="6"
+        ></textarea>
+        <div class="console-footer">
+          <span id="char-count" class="char-count">0 / 2000</span>
+          <button id="transmit-btn" class="transmit-btn" type="button">
+            <span class="transmit-label">TRANSMIT</span>
+            <span class="transmit-arrow" aria-hidden="true">▸</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="output-frame" id="output-frame">
+        <div class="console-label">
+          <span class="dot dot-idle" id="output-dot"></span> <span id="output-status">STANDING BY</span>
+        </div>
+
+        <div id="idle-state" class="idle-state">
+          <p>Awaiting transmission…</p>
+          <p class="idle-hint">Results are stamped here once received.</p>
+        </div>
+
+        <div id="error-state" class="error-state" hidden>
+          <p id="error-message"></p>
+        </div>
+
+        <div id="ticker-state" class="ticker-state" hidden>
+          <span class="ticker-text" id="ticker-text"></span><span class="cursor">▊</span>
+        </div>
+
+        <div id="result-state" class="result-state" hidden>
+          <p class="confirm-line" id="confirm-line">Transmission complete. Classification successful.</p>
+
+          <div class="stamp" id="stamp">
+            <span class="stamp-code" id="stamp-code">TECH</span>
+            <span class="stamp-label" id="stamp-label">Sci/Tech</span>
+          </div>
+
+          <p class="latency-line" id="latency-line"></p>
+
+          <div class="confidence-panel">
+            <div class="confidence-heading">DECISION SIGNAL BY DESK</div>
+            <div class="confidence-bars" id="confidence-bars"></div>
+            <p class="confidence-note">
+              SVM decision-margin softmax, shown as a signal strength — not a calibrated probability.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stat-strip" aria-label="Model performance summary">
+      <div class="stat">
+        <span class="stat-value">{{ "%.2f"|format(project.test_metrics.accuracy * 100) }}%</span>
+        <span class="stat-label">Test Accuracy</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">{{ "%.4f"|format(project.test_metrics.macro_f1) }}</span>
+        <span class="stat-label">Test Macro F1</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">120K</span>
+        <span class="stat-label">Training Articles</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">4 / 4</span>
+        <span class="stat-label">Models Benchmarked</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">LinearSVC</span>
+        <span class="stat-label">Selected Model</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wire-footer">
+    <p>{{ project.title }} — {{ project.subtitle }}. {{ project.status }}</p>
+    <p class="model-info">Model: {{ project.model_name }} &nbsp;·&nbsp; {{ project.vectorizer_desc }}</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
