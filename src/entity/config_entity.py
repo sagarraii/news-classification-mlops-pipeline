@@ -161,3 +161,19 @@ class ModelEvaluationConfig:
     evaluation_summary_path: Path
     threshold_analysis_path: Path
 
+
+@dataclass(frozen=True)
+class TransformerTrainerConfig:
+    train_data_path: Path
+    model_name: str
+    max_length: int
+    batch_size: int
+    learning_rate: float
+    num_epochs: int
+    weight_decay: float
+    validation_size: float
+    random_state: int
+    model_dir: Path
+    tokenizer_dir: Path
+    patience: int
+    num_workers: int
