@@ -117,20 +117,3 @@ class TextPreprocessor:
             logger.exception("Error while preprocessing text series.")
             raise CustomException(e, sys)
 
-'''
-if __name__ == "__main__":
-
-  from src.config.configuration import ConfigurationManager
-
-  config = ConfigurationManager().get_text_preprocessor_config()
-
-  preprocessor = TextPreprocessor(config)
-
-  sample = "The Prime Minister announced new economic policies today at Parliament."
-
-  cleaned, tokens = preprocessor.preprocess(sample)
-
-  print(cleaned)
-  print(tokens)
-
-'''
