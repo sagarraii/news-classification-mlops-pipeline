@@ -46,29 +46,3 @@ class FeatureBuilder:
     
 
     
-
-'''
-
-if __name__ == "__main__":
-    # Quick smoke test — run after data_transformation has run
-    import pandas as pd
-    from src.text_preprocessor import TextPreprocessor
-
-    config = load_config()
-    train_df = pd.read_csv(config["data"]["train_path"])
-    test_df  = pd.read_csv(config["data"]["test_path"])
-    text_col = config["data"]["text_column"]
-
-    preprocessor = TextPreprocessor(config)
-    X_train_str, X_train_tokens = preprocessor.preprocess_series(train_df[text_col])
-    X_test_str,  X_test_tokens  = preprocessor.preprocess_series(test_df[text_col])
-
-    # Test TF-IDF
-    X_tr_tfidf, X_te_tfidf = build_tfidf(X_train_str, X_test_str, config)
-    print("TF-IDF shapes:", X_tr_tfidf.shape, X_te_tfidf.shape)
-
-    # Test AvgWord2Vec
-    X_tr_w2v, X_te_w2v = build_avg_word2vec(X_train_tokens, X_test_tokens, config)
-    print("AvgW2V shapes:", X_tr_w2v.shape, X_te_w2v.shape)
-
-'''
