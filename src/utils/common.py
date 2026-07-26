@@ -67,7 +67,6 @@ def create_directories(path_to_directories: list[Path], verbose: bool = True) ->
     
 
 
-#@ensure_annotations
 def save_json(path: Path, data: dict) -> None:
     """Saves dictionary data to a JSON file."""
 
@@ -81,7 +80,7 @@ def save_json(path: Path, data: dict) -> None:
     except Exception as e:
         raise CustomException(e, sys)
 
-#@ensure_annotations
+
 def load_json(path: Path) -> ConfigBox:
     """Loads JSON file data as class attributes."""
 
@@ -96,7 +95,7 @@ def load_json(path: Path) -> ConfigBox:
         raise CustomException(e, sys)
 
 
-#@ensure_annotations
+
 def save_bin(data: Any, path: Path) -> None:
     """Saves binary file using joblib."""
 
@@ -110,7 +109,7 @@ def save_bin(data: Any, path: Path) -> None:
         raise CustomException(e, sys)
 
 
-#@ensure_annotations
+
 def load_bin(path: Path) -> Any:
     """Loads binary data using joblib."""
 
@@ -123,7 +122,7 @@ def load_bin(path: Path) -> Any:
     except Exception as e:
         raise CustomException(e, sys)
 
-# @ensure_annotations
+
 def save_numpy_array_data(file_path: Path, array: np.ndarray) -> None:
     """Saves numpy array data to a file."""
 
@@ -137,7 +136,7 @@ def save_numpy_array_data(file_path: Path, array: np.ndarray) -> None:
     except Exception as e:
         raise CustomException(e, sys)
 
-#@ensure_annotations
+
 def load_numpy_array_data(file_path: Path) -> np.ndarray:
     """Loads numpy array data from a file."""
 
@@ -148,7 +147,7 @@ def load_numpy_array_data(file_path: Path) -> np.ndarray:
     except Exception as e:
         raise CustomException(e, sys)
 
-#@ensure_annotations obj: Any(accepting generic object)
+
 def save_object(file_path: Path, obj: Any) -> None:
     """Pickles a python object using standard serialization."""
 
@@ -162,7 +161,7 @@ def save_object(file_path: Path, obj: Any) -> None:
     except Exception as e:
         raise CustomException(e, sys)
 
-#@ensure_annotations
+
 def load_object(file_path: Path) -> Any:
     """Loads a pickled object from a file path."""
 
