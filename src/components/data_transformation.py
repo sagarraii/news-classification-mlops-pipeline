@@ -20,9 +20,6 @@ from src.entity.config_entity import (TextPreprocessorConfig,
 from src.logger.custom_logger import logger
 from src.exception.custom_exception import CustomException
 
-# for temperory test
-# from src.config.configuration import ConfigurationManager
-
 class DataTransformation:
     def __init__(self, 
                  tp_config: TextPreprocessorConfig, 
