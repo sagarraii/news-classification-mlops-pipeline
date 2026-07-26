@@ -15,10 +15,10 @@ from src.entity.config_entity import (DataIngestionConfig,
                                       LogisticRegressionParams,
                                       MultinomialNaiveBayesParams,
                                       LinearSVMParams,
-                                      
                                       LightGBMParams,
                                       ModelTrainerParams,
-                                      ModelEvaluationConfig)
+                                      ModelEvaluationConfig,
+                                      TransformerTrainerConfig)
 
 class ConfigurationManager:
     def __init__(self,
@@ -182,7 +182,6 @@ class ConfigurationManager:
 
         return model_trainer_config
     
-    # design data transformation and adjust Text_preprocessor and feature_builder similar to model_trainer_params
 
     def get_model_trainer_params(self) -> ModelTrainerParams:
         params = self.params
@@ -265,4 +264,25 @@ class ConfigurationManager:
 
         return model_evaluation_config
     
-# deployment config remains
+
+    def get_transformer_trainer_config(self) -> TransformerTrainerConfig:
+
+        config = self.config.transformer_trainer
+        params = self.params.transformer
+
+        return TransformerTrainerConfig(
+            train_data_path=Path(config.train_data_path),
+            model_name=params.model_name,
+            max_length=params.max_length,
+            batch_size=params.batch_size,
+            learning_rate=params.learning_rate,
+            num_epochs=params.num_epochs,
+            weight_decay=params.weight_decay,
+            validation_size=params.validation_size,
+            random_state=params.random_state,
+            model_dir=Path(config.model_dir),
+            tokenizer_dir=Path(config.tokenizer_dir),
+            patience=params.patience,
+            num_workers=params.num_workers 
+        )
+        
