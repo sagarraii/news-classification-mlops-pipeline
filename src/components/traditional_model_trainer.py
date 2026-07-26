@@ -1,5 +1,3 @@
-# ingestion of ml flow is still pending and i will do it later
-
 import sys
 import pandas as pd
 
